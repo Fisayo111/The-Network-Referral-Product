@@ -265,13 +265,23 @@ Collections:
 {
   "_id": ObjectId,
   "name": String,
-  "phone": String,
-  "services": [String] (["plumber", "electrician"]),
-  "communityIds": [ObjectId] (communities they serve),
-  "profilePhoto": String (URL),
+  "phone": String, // Add unique constraint
+  "email": String, // Add unique constraint
+  "services": [String],
+  "communityIds": [ObjectId],
+  "profilePhoto": String,
   "totalReferences": Number,
   "averageRating": Number,
-  "createdAt": Date
+  "availability": { 
+    "monday": [{"start": "09:00", "end": "17:00"}],
+    "tuesday": [...],
+
+  },
+  "isActive": Boolean, 
+  "responseRate": Number,
+  "averageResponseTime": Number, 
+  "createdAt": Date,
+  "updatedAt": Date
 }
 ```
 
@@ -280,16 +290,33 @@ Collections:
 {
   "_id": ObjectId,
   "workerId": ObjectId,
-  "authorId": ObjectId (user who vouched),
+  "authorId": ObjectId,
   "communityId": ObjectId,
+  "bookingId": ObjectId,
   "serviceType": String,
-  "rating": Number (1-5),
-  "description": String (detailed context),
+  "rating": Number,
+  "description": String,
   "priceCharged": Number,
-  "photos": [String] (URLs),
+  "photos": [String],
   "isRepeatCustomer": Boolean,
   "timesUsed": Number,
-  "createdAt": Date
+  "workQuality": { 
+    "professionalism": Number, // 1-5
+    "punctuality": Number,
+    "cleanliness": Number,
+    "valueForMoney": Number
+  },
+  "disputeStatus": String, //none" | "disputed" | "resolved"
+  "disputeReason": String, 
+  "isEdited": Boolean, 
+  "editHistory": [{
+    "editedAt": Date,
+    "oldRating": Number,
+    "oldDescription": String
+  }],
+  "visibility": String, 
+  "createdAt": Date,
+  "updatedAt": Date
 }
 ```
 
